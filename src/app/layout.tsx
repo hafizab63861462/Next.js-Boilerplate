@@ -1,18 +1,19 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 
-
 import "./globals.css";
 import "react-phone-input-2/lib/material.css";
 
 import { ReduxStoreProvider, ThemeProvider } from "@/lib/index";
 
 export const metadata = {
-  title: "QuickTopups",
-  description: "Quick Topups - Your one-stop solution for fast and easy top-ups",
+  title: "Boiler plate",
+  description: "Your one-stop solution for fast and easy top-ups",
 };
 
-export default async function RootLayoutDep({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayoutDep({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
       {/* Load the miniapp SDK asynchronously */}
