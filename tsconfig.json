@@ -1,0 +1,62 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@redux/*": [
+        "./src/redux/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@theme/*": [
+        "./src/theme/*"
+      ],
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "scripts/createAdminUser.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
