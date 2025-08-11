@@ -1,34 +1,16 @@
-"use client"; // ← This is required!
+"use client";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-
-const StyledPaper = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  boxShadow: theme.shadows[5],
-  padding: theme.spacing(6),
-  borderRadius: "8px",
-  maxWidth: "400px",
-  width: "100%",
-  margin: "auto",
-  marginTop: "100px",
-}));
-
-const StyledButton = styled(Button)(() => ({
-  width: "100%",
-  textTransform: "none",
-  fontSize: "1rem",
-  fontWeight: 600,
-  padding: "10px 0",
-}));
+import Divider from "@mui/material/Divider";
 
 export default function LoginPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   return (
     <Box
       sx={{
@@ -36,21 +18,27 @@ export default function LoginPage() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "100vh",
-        bgcolor: "#f5f5f5",
+        height: "100vh", // instead of minHeight
+        backgroundColor: "background.paper",
         p: 2,
+        boxSizing: "border-box",
       }}
     >
-      <StyledPaper>
+      <Box
+        sx={{
+          boxShadow: 5,
+          p: "50px 50px 14px 50px",
+          borderRadius: "8px",
+          maxWidth: "400px",
+          width: "100%",
+          margin: "auto",
+        }}
+      >
         <Typography variant="h5" component="h1" fontWeight="bold" gutterBottom>
           Sign in
         </Typography>
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          align="center"
-          sx={{ mb: 3 }}
-        >
+
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
           Welcome back! Please sign in to continue.
         </Typography>
 
@@ -71,11 +59,11 @@ export default function LoginPage() {
               height: 40,
             },
             "& .MuiInputLabel-root": {
-              transform: "translate(14px, 8px) scale(1)", // Adjust label position
+              transform: "translate(14px, 8px) scale(1)",
               fontSize: "14px",
             },
             "& .MuiInputLabel-shrink": {
-              transform: "translate(14px, -6px) scale(0.75)", // Label when focused/filled
+              transform: "translate(14px, -6px) scale(0.75)",
             },
           }}
         />
@@ -97,19 +85,20 @@ export default function LoginPage() {
               height: 40,
             },
             "& .MuiInputLabel-root": {
-              transform: "translate(14px, 8px) scale(1)", // Adjust label position
+              transform: "translate(14px, 8px) scale(1)",
               fontSize: "14px",
             },
             "& .MuiInputLabel-shrink": {
-              transform: "translate(14px, -6px) scale(0.75)", // Label when focused/filled
+              transform: "translate(14px, -6px) scale(0.75)",
             },
           }}
         />
 
-        <StyledButton
+        <Button
           type="submit"
           variant="contained"
           sx={{
+            width: "100%",
             backgroundColor: "#2F3037",
             height: 40,
             padding: "6px 0",
@@ -122,8 +111,21 @@ export default function LoginPage() {
           }}
         >
           Continue
-        </StyledButton>
-      </StyledPaper>
+        </Button>
+
+        <Divider sx={{ mt: "24px", mb: "14px" }} />
+
+        <Typography variant="body2" color="text.secondary" align="center">
+          Don’t have an account?{" "}
+          <Typography
+            component="span"
+            color="primary"
+            sx={{ cursor: "pointer", fontWeight: 500 }}
+          >
+            Sign up
+          </Typography>
+        </Typography>
+      </Box>
     </Box>
   );
 }

@@ -1,56 +1,6 @@
-:root {
-  --color-primary-dark: #07389d;
-  --color-primary-light: #306bdd;
-  --color-white: #fff;
-  --color-cta: #0dcfda;
-  --color-btn-continue: #30c6c6;
-  --color-black: #000;
-  --color-black-light-1: #2e2e2e;
-  --color-pink: #fd5965;
-  --color-orange: #fd7543;
-}
-
+html,
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f0f1f1;
-  font: normal normal normal 12px/18px Poppins;
-  color: #3c3c3c;
-  margin: 0px;
-  overflow: auto;
-}
-
-.active {
-  background-color: #f6f2ff;
-  color: "#6631F7";
-}
-.custom-flag-select {
-  height: 108%;
-  border: 1px solid #fff;
-}
-.custom-flags-bg {
-  background-color: #fff;
-  border-radius: 4px;
-}
-
-.header-styles {
-  color: #3c3c3c;
-  font-weight: 600;
-}
-
-/** Side Menu Drawer CSS **/
-
-.MuiDrawer-paper {
-  scrollbar-width: thin;
-  scrollbar-color: #bdbdbd #f6f2ff;
-}
-.MuiDrawer-paper::-webkit-scrollbar {
-  width: 6px;
-  background: #f6f2ff;
-}
-.MuiDrawer-paper::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
-  border-radius: 6px;
-}
-.MuiDrawer-paper::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scroll when content fits */
 }
