@@ -10,12 +10,20 @@ const hashPassword = async (password: string): Promise<string> => {
 
 export const signupUser = async (
   email: string,
-  password: string
+  password: string,
+  confirmPassword: string
 ): Promise<ActionResult> => {
   const { db } = await dbConnection(process.env.DB_NAME ?? "yasim");
 
   if (!email || !password) {
     return { success: false, error: "Email and password are required" };
+  }
+
+  if (password !== confirmPassword) {
+    return {
+      success: false,
+      error: "Password and confirm password should match",
+    };
   }
 
   if (!/\S+@\S+\.\S+/.test(email)) {
