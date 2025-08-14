@@ -12,11 +12,7 @@ const LoginComponent = () => {
   const router = useRouter();
 
   const handleLogin = () => {
-    // Call your login API
     console.log("Logging in...", { email, password });
-    // Example: await login({ email, password });
-    // On success:
-    // router.push("/dashboard");
   };
 
   return (

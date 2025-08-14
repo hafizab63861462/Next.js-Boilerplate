@@ -1,11 +1,16 @@
+// components/AuthForm.tsx
 "use client";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
 
 type AuthFormProps = {
   title: string;
@@ -15,7 +20,7 @@ type AuthFormProps = {
   footerText: string;
   footerLinkLabel: string;
   onFooterLinkClick: () => void;
-  showConfirmPassword?: boolean;
+  isShowCosnfirmPassword?: boolean;
   email: string;
   setEmail: (email: string) => void;
   password: string;
@@ -32,7 +37,7 @@ export default function AuthForm({
   footerText,
   footerLinkLabel,
   onFooterLinkClick,
-  showConfirmPassword = false,
+  isShowCosnfirmPassword = false,
   email,
   setEmail,
   password,
@@ -40,6 +45,21 @@ export default function AuthForm({
   confirmPassword,
   setConfirmPassword,
 }: AuthFormProps) {
+  // State for toggling password visibility
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = (event: React.MouseEvent) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+  const handleMouseDownConfirmPassword = (event: React.MouseEvent) => {
+    event.preventDefault();
+  };
+
   return (
     <Box
       sx={{
@@ -97,14 +117,14 @@ export default function AuthForm({
         }}
       />
 
-      {/* Password Field */}
+      {/* Password Field with Toggle */}
       <TextField
         margin="normal"
         required
         fullWidth
         name="password"
         label="Password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         id="password"
         autoComplete={showConfirmPassword ? "new-password" : "current-password"}
         value={password}
@@ -122,16 +142,36 @@ export default function AuthForm({
             transform: "translate(14px, -6px) scale(0.75)",
           },
         }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+                size="small"
+              >
+                {showPassword ? (
+                  <VisibilityOff fontSize="small" />
+                ) : (
+                  <Visibility fontSize="small" />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
 
-      {showConfirmPassword && (
+      {/* Confirm Password Field with Toggle */}
+      {isShowCosnfirmPassword && (
         <TextField
           margin="normal"
           required
           fullWidth
           name="confirmPassword"
           label="Confirm Password"
-          type="password"
+          type={showConfirmPassword ? "text" : "password"}
           id="confirm-password"
           autoComplete="new-password"
           value={confirmPassword}
@@ -148,6 +188,25 @@ export default function AuthForm({
             "& .MuiInputLabel-shrink": {
               transform: "translate(14px, -6px) scale(0.75)",
             },
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle confirm password visibility"
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownConfirmPassword}
+                  edge="end"
+                  size="small"
+                >
+                  {showConfirmPassword ? (
+                    <VisibilityOff fontSize="small" />
+                  ) : (
+                    <Visibility fontSize="small" />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
           }}
         />
       )}

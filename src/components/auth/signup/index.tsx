@@ -16,11 +16,7 @@ const SignUpComponent = () => {
       alert("Passwords do not match!");
       return;
     }
-    // Call your signup API
     console.log("Signing up...", { email, password });
-    // Example: await signup({ email, password });
-    // On success:
-    // router.push("/dashboard");
   };
 
   return (
@@ -43,7 +39,7 @@ const SignUpComponent = () => {
         footerText="Already have an account?"
         footerLinkLabel="Sign in"
         onFooterLinkClick={() => router.push("/login")}
-        showConfirmPassword
+        isShowCosnfirmPassword
         email={email}
         setEmail={setEmail}
         password={password}
