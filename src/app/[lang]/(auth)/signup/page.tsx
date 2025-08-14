@@ -1,6 +1,6 @@
 "use client";
 
-import { SignUpComponent } from "@/components/signup";
+import SignUpComponent from "@/components/auth/signup";
 
 export default function SignUpPage() {
   return <SignUpComponent />;
