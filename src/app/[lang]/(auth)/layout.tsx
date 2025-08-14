@@ -13,8 +13,9 @@ export default async function AuthLayout({
 }: Readonly<{ children: ReactNode; params: Promise<{ lang: string }> }>) {
   const { lang } = await params;
   const session: any = await getServerSession(authOptions);
+
   if (session) {
-    const profileResponse = await getUserById(session?.user?.id);
+    const profileResponse = await getUserById(session?.user?._id);
     if (profileResponse?.success && profileResponse?.data) {
       return redirect(`/${lang}/dashboard`);
     }

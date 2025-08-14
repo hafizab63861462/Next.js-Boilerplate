@@ -64,6 +64,8 @@ export const loginUser = async (
       { expiresIn: "30d" }
     );
 
+    console.log("token in use api", token);
+
     return {
       success: true,
       data: {

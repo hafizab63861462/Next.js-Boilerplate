@@ -18,10 +18,10 @@ export default async function ProtectedLayout({
   const { lang } = await params;
   const session: any = await getServerSession(authOptions);
   if (!session) {
-    return redirect(`/${lang}/admin/login`);
+    return redirect(`/${lang}/login`);
   }
 
-  const profileResponse = await getUserById(session?.user?.id);
+  const profileResponse = await getUserById(session?.user?._id);
 
   if (!profileResponse?.success || !profileResponse?.data) {
     return redirect(`/${lang}/login`);

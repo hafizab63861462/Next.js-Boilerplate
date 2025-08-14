@@ -4,7 +4,11 @@ import Head from "next/head";
 import "./globals.css";
 import "react-phone-input-2/lib/material.css";
 
-import { ReduxStoreProvider, ThemeProvider } from "@/lib/index";
+import {
+  ReduxStoreProvider,
+  ThemeProvider,
+  NextAuthProvider,
+} from "@/lib/index";
 
 export const metadata = {
   title: "Boiler plate",
@@ -28,7 +32,9 @@ export default async function RootLayoutDep({
       </Head>
       <ReduxStoreProvider>
         <ThemeProvider>
-          <body>{children}</body>
+          <body>
+            <NextAuthProvider>{children}</NextAuthProvider>
+          </body>
         </ThemeProvider>
       </ReduxStoreProvider>
     </html>

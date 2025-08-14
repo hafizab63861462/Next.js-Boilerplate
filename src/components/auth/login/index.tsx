@@ -13,10 +13,14 @@ const LoginComponent = () => {
 
   const handleLogin = async () => {
     const res = await signIn("login", {
+      redirect: false,
       email,
       password,
-      redirect: false,
     });
+
+    if (res?.ok) {
+      router.push("/dashboard");
+    }
 
     console.log("res", res);
   };
