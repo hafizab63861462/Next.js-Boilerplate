@@ -18,7 +18,7 @@ export default function LoginPage() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh", // instead of minHeight
+        height: "100vh",
         backgroundColor: "background.paper",
         p: 2,
         boxSizing: "border-box",
@@ -34,14 +34,27 @@ export default function LoginPage() {
           margin: "auto",
         }}
       >
-        <Typography variant="h5" component="h1" fontWeight="bold" gutterBottom>
+        {/* Centered Headings */}
+        <Typography
+          variant="h5"
+          component="h1"
+          fontWeight="bold"
+          gutterBottom
+          align="center" // Centers the text
+        >
           Sign in
         </Typography>
 
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ mb: 3 }}
+          align="center" // Centers the text
+        >
           Welcome back! Please sign in to continue.
         </Typography>
 
+        {/* Form Fields */}
         <TextField
           margin="normal"
           required
