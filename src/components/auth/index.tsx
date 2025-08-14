@@ -81,10 +81,11 @@ export default function AuthForm({
       >
         {title}
       </Typography>
+
       <Typography
-        variant="body1"
+        variant="body2"
         color="text.secondary"
-        sx={{ mb: 3 }}
+        sx={{ mb: 3, fontSize: "14px" }}
         align="center"
       >
         {subtitle}
