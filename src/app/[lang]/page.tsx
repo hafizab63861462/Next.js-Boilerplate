@@ -1,17 +1,10 @@
 "use server";
 
-import React from "react";
-import dynamic from "next/dynamic";
+import { redirect } from "next/navigation";
 
-const HomeComponent = dynamic(() =>
-  import("@/components/home").then((mod) => mod.HomeComponent)
-);
-
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: any;
-}) {
-  const params = await searchParams;
-  return <HomeComponent />;
+export default async function Page({
+  params,
+}: Readonly<{ params: Promise<{ lang: string }> }>) {
+  const { lang } = await params;
+  redirect(`/${lang}/login`);
 }
