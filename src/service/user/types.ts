@@ -8,7 +8,7 @@ export interface IUserProfile {
 }
 
 export type ActionResult =
-  | { success: true; data: any }
+  | { success: true; data: any; token: string }
   | { success: false; error: string };
 
 export type User = {

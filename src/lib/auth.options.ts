@@ -1,50 +1,57 @@
-import { AuthOptions, SessionStrategy } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-
+import { AuthOptions, SessionStrategy } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { loginUser } from "@/service/user/user.queries";
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      id: 'login',
-      name: 'Credentials',
+      id: "login",
+      name: "Credentials",
       credentials: {
-        userName: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
-        remember: { label: 'Remember me', type: 'boolean' },
-        userType: { label: 'User Type', type: "text" },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<any> {
         try {
-          if (!credentials?.userName || !credentials?.password) {
-            throw new Error('Invalid credentials');
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Invalid credentials");
           }
 
+          const res = await loginUser(
+            credentials?.email,
+            credentials?.password
+          );
 
-          return {
-            userName: credentials.userName,
-            remember: credentials.remember,
-            userType: credentials.userType
+          if (res?.success) {
+            return {
+              ...res.data,
+              token: res.token,
+            };
+          } else {
+            throw new Error(res?.error);
           }
         } catch (error: any) {
           console.error(error);
-          throw new Error(error?.message ?? "something went wrong on authenticate");
+          throw new Error(
+            error?.message ?? "something went wrong on authenticate"
+          );
         }
-      }
+      },
     }),
   ],
   session: {
-    strategy: 'jwt' as SessionStrategy,
-    maxAge: 24 * 60 * 60
+    strategy: "jwt" as SessionStrategy,
+    maxAge: 24 * 60 * 60,
   },
   jwt: {
-    maxAge: 24 * 60 * 60
+    maxAge: 24 * 60 * 60,
   },
   callbacks: {
     async jwt({ token, user }: any) {
       return {
         ...token,
-        ...user
+        ...user,
       };
     },
     async session({ session, token }: any) {
@@ -53,6 +60,6 @@ export const authOptions: AuthOptions = {
         session.maxAge = Number(token?.long_login) * 24 * 60 * 60;
       }*/
       return session;
-    }
-  }
+    },
+  },
 };

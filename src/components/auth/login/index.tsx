@@ -1,18 +1,24 @@
-// app/login/page.tsx
 "use client";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import AuthForm from "@/components/auth";
+import { signIn } from "next-auth/react";
 
 const LoginComponent = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
-    console.log("Logging in...", { email, password });
+  const handleLogin = async () => {
+    const res = await signIn("login", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    console.log("res", res);
   };
 
   return (
