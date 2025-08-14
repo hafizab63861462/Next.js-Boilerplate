@@ -3,7 +3,6 @@ import { ObjectId } from "mongodb";
 import { dbConnection } from "@/service/db.connection";
 import { ActionResult, User } from "@/service/user/types";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 const verifyPassword = async (
   password: string,
@@ -58,14 +57,6 @@ export const loginUser = async (
       return { success: false, error: "Invalid email or password" };
     }
 
-    const token = jwt.sign(
-      { id: user._id.toString() },
-      process.env.NEXTAUTH_SECRET as string,
-      { expiresIn: "30d" }
-    );
-
-    console.log("token in use api", token);
-
     return {
       success: true,
       data: {
@@ -74,7 +65,6 @@ export const loginUser = async (
         createdAt: user.createdAt?.toISOString(),
         updatedAt: user.updatedAt?.toISOString(),
       },
-      token,
     };
   } catch (error) {
     console.error("Error during login:", error);

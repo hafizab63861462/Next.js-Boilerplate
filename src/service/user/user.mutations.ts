@@ -2,7 +2,6 @@
 import { dbConnection } from "@/service/db.connection";
 import bcrypt from "bcrypt";
 import { ActionResult, User } from "@/service/user/types";
-import jwt from "jsonwebtoken";
 
 const hashPassword = async (password: string): Promise<string> => {
   const saltRounds = 10;
@@ -40,12 +39,6 @@ export const signupUser = async (
 
     const user = await db.collection("users").insertOne(newUser);
 
-    const token = jwt.sign(
-      { id: user.insertedId.toString() },
-      process.env.NEXTAUTH_SECRET as string,
-      { expiresIn: "30d" }
-    );
-
     return {
       success: true,
       data: {
@@ -54,7 +47,6 @@ export const signupUser = async (
         createdAt: newUser.createdAt?.toISOString(),
         updatedAt: newUser.updatedAt?.toISOString(),
       },
-      token,
     };
   } catch (error) {
     console.error("Error during signup:", error);

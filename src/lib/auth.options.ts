@@ -24,10 +24,7 @@ export const authOptions: AuthOptions = {
           );
 
           if (res?.success) {
-            return {
-              ...res.data,
-              token: res.token,
-            };
+            return res.data;
           } else {
             throw new Error(res?.error);
           }
